@@ -27,8 +27,18 @@ allOpen {
     annotation 'tech.ascendio.mvvm.testing.OpenClass'
 }
 
+// Create a variable called imgurPropertiesFile, and initialize it to your
+// imgur.properties file, in the rootProject folder.
+def imgurPropertiesFile = rootProject.file("imgur.properties")
+// Initialize a new Properties() object called imgurProperties.
+def imgurProperties = new Properties()
+// Load your imgur.properties file into the imgurProperties object.
+imgurProperties.load(new FileInputStream(imgurPropertiesFile))
+
 def appVersionCode = getVersionCode()
 def appVersionName = new Date().format("ddMMyy") + "-" + appVersionCode
+
+def IMGUR_CONFIG = { k -> "\"${imgurProperties.get(k)}\"" }
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -40,6 +50,8 @@ android {
         versionCode appVersionCode
         versionName appVersionName
         testInstrumentationRunner "tech.ascendio.mvvm.util.AppTestRunner"
+        buildConfigField "String", "IMGUR_CLIENT_ID", IMGUR_CONFIG("clientId")
+        buildConfigField "String", "IMGUR_BASE_URL", IMGUR_CONFIG("baseUrl")
     }
     buildTypes {
         debug {
