@@ -18,12 +18,12 @@ package tech.ascendio.mvvm.di
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import tech.ascendio.mvvm.ui.fragments.UserFragment
+import tech.ascendio.mvvm.ui.fragments.SubredditImagesFragment
 
 @Suppress("unused")
 @Module
 abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
-    abstract fun contributeUserFragment(): UserFragment
+    abstract fun contributeUserFragment(): SubredditImagesFragment
 }

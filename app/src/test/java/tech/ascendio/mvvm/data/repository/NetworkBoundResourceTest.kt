@@ -21,12 +21,6 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
-import tech.ascendio.mvvm.data.api.ApiResponse
-import tech.ascendio.mvvm.util.ApiUtil
-import tech.ascendio.mvvm.util.CountingAppExecutors
-import tech.ascendio.mvvm.util.InstantAppExecutors
-import tech.ascendio.mvvm.util.mock
-import tech.ascendio.mvvm.data.vo.Resource
 import okhttp3.MediaType
 import okhttp3.ResponseBody
 import org.hamcrest.CoreMatchers.`is`
@@ -36,10 +30,14 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
-import org.mockito.Mockito.reset
-import org.mockito.Mockito.verify
-import org.mockito.Mockito.verifyNoMoreInteractions
+import org.mockito.Mockito.*
 import retrofit2.Response
+import tech.ascendio.mvvm.data.api.ApiResponse
+import tech.ascendio.mvvm.data.vo.Resource
+import tech.ascendio.mvvm.util.ApiUtil
+import tech.ascendio.mvvm.util.CountingAppExecutors
+import tech.ascendio.mvvm.util.InstantAppExecutors
+import tech.ascendio.mvvm.util.mock
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
@@ -76,8 +74,8 @@ class NetworkBoundResourceTest(private val useRealExecutors: Boolean) {
         else
             InstantAppExecutors()
         networkBoundResource = object : NetworkBoundResource<Foo, Foo>(appExecutors) {
-            override fun saveCallResult(item: Foo) {
-                handleSaveCallResult(item)
+            override fun saveCallResult(items: Foo) {
+                handleSaveCallResult(items)
             }
 
             override fun shouldFetch(data: Foo?): Boolean {

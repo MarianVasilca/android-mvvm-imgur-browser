@@ -20,12 +20,12 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
 import android.support.annotation.MainThread
 import android.support.annotation.WorkerThread
-import tech.ascendio.mvvm.util.AppExecutors
 import tech.ascendio.mvvm.data.api.ApiEmptyResponse
 import tech.ascendio.mvvm.data.api.ApiErrorResponse
 import tech.ascendio.mvvm.data.api.ApiResponse
 import tech.ascendio.mvvm.data.api.ApiSuccessResponse
 import tech.ascendio.mvvm.data.vo.Resource
+import tech.ascendio.mvvm.util.AppExecutors
 
 /**
  * A generic class that can provide a resource backed by both the sqlite database and the network.
@@ -113,7 +113,7 @@ abstract class NetworkBoundResource<ResultType, RequestType>
     protected open fun processResponse(response: ApiSuccessResponse<RequestType>) = response.body
 
     @WorkerThread
-    protected abstract fun saveCallResult(item: RequestType)
+    protected abstract fun saveCallResult(items: RequestType)
 
     @MainThread
     protected abstract fun shouldFetch(data: ResultType?): Boolean

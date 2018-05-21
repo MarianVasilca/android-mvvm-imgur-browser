@@ -18,13 +18,12 @@ package tech.ascendio.mvvm.di
 
 import android.app.Application
 import android.arch.persistence.room.Room
-import tech.ascendio.mvvm.data.api.AppService
-import tech.ascendio.mvvm.data.db.AppDb
-import tech.ascendio.mvvm.util.LiveDataCallAdapterFactory
 import dagger.Module
 import dagger.Provides
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import tech.ascendio.mvvm.data.api.AppService
+import tech.ascendio.mvvm.data.api.ImgurApi
+import tech.ascendio.mvvm.data.db.AppDb
+import tech.ascendio.mvvm.data.db.ImageDao
 import javax.inject.Singleton
 
 @Module(includes = [ViewModelModule::class])
@@ -32,21 +31,22 @@ class AppModule {
     @Singleton
     @Provides
     fun provideAppService(): AppService {
-        return Retrofit.Builder()
-            .baseUrl("https://ascendio.tech/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(LiveDataCallAdapterFactory())
-            .build()
-            .create(AppService::class.java)
+        return ImgurApi.instance.mImgurService
     }
 
     @Singleton
     @Provides
     fun provideDb(app: Application): AppDb {
         return Room
-            .databaseBuilder(app, AppDb::class.java, "app.db")
-            .fallbackToDestructiveMigration()
-            .build()
+                .databaseBuilder(app, AppDb::class.java, "app.db")
+                .fallbackToDestructiveMigration()
+                .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideImageDao(db: AppDb): ImageDao {
+        return db.imageDao()
     }
 
 }

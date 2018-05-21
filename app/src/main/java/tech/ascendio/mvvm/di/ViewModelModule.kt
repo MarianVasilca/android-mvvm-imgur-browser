@@ -16,14 +16,22 @@
 
 package tech.ascendio.mvvm.di
 
+import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
+import dagger.multibindings.IntoMap
 import tech.ascendio.mvvm.viewmodel.AppViewModelFactory
+import tech.ascendio.mvvm.viewmodel.ImageViewModel
 
 @Suppress("unused")
 @Module
 abstract class ViewModelModule {
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ImageViewModel::class)
+    abstract fun bindImageViewModel(imageViewModel: ImageViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: AppViewModelFactory): ViewModelProvider.Factory

@@ -15,12 +15,12 @@
   -->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:startDestination="@id/userFragment">
+    app:startDestination="@id/subredditImagesFragment">
 
     <fragment
-        android:id="@+id/userFragment"
-        android:name="tech.ascendio.mvvm.ui.fragments.UserFragment"
-        android:label="UserFragment">
+        android:id="@+id/subredditImagesFragment"
+        android:name="tech.ascendio.mvvm.ui.fragments.SubredditImagesFragment"
+        android:label="SubredditImagesFragment">
 
     </fragment>
 

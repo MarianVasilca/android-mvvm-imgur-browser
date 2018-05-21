@@ -1,5 +1,7 @@
+package tech.ascendio.mvvm.ui.common
+
 /*
- * Copyright (C) 2018 Marian Vasilca
+ * Copyright (C) 2017 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +16,12 @@
  * limitations under the License.
  */
 
-package tech.ascendio.mvvm.data.db
-
-
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
-import tech.ascendio.mvvm.data.vo.Image
+import android.databinding.ViewDataBinding
+import android.support.v7.widget.RecyclerView
 
 /**
- * Main database description.
- */
-@Database(
-        entities = [
-            Image::class
-        ],
-        version = 4,
-        exportSchema = false
-)
-abstract class AppDb : RoomDatabase() {
-    abstract fun imageDao(): ImageDao
-}
+ * A generic ViewHolder that works with a [ViewDataBinding].
+ * @param <T> The type of the ViewDataBinding.
+</T> */
+class DataBoundViewHolder<out T : ViewDataBinding> constructor(val binding: T) :
+        RecyclerView.ViewHolder(binding.root)
