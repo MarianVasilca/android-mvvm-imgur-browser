@@ -25,13 +25,13 @@ class GalleryRepository @Inject constructor(
 
     fun getSubredditGalleries(
             subreddit: String,
-            page: Int, sort:
-            String = "top",
-            window: String = "all"
+            page: Int = 1,
+            sort: String = "hot",
+            window: String = "day"
     ): LiveData<Resource<List<Image>>> {
         return object : NetworkBoundResource<List<Image>, Response<List<Image>>>(appExecutors) {
             override fun saveCallResult(items: Response<List<Image>>) = imageDao.insertImages(items.data)
-            override fun shouldFetch(data: List<Image>?): Boolean = data?.isEmpty() ?: true
+            override fun shouldFetch(data: List<Image>?): Boolean = true
             override fun loadFromDb(): LiveData<List<Image>> = imageDao.loadBySubreddit(subreddit)
             override fun createCall(): LiveData<ApiResponse<Response<List<Image>>>> =
                     appService.getSubredditGalleries(subreddit, sort, window, page)

@@ -20,4 +20,5 @@
     <string name="iv_description_image_item">Image Item</string>
     <string name="action_search">Search</string>
     <string name="search_hint">Enter a subreddit…</string>
+    <string name="image_score">Score: %d</string>
 </resources>

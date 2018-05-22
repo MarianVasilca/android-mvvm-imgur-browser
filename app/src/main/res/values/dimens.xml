@@ -15,6 +15,62 @@
   -->
 
 <resources>
+
+    <dimen name="divider_height">1dp</dimen>
+
+    <!-- Text Size for Material Design -->
+    <dimen name="text_size_display_4_material">112sp</dimen>
+    <dimen name="text_size_display_3_material">56sp</dimen>
+    <dimen name="text_size_display_2_material">45sp</dimen>
+    <dimen name="text_size_display_1_material">34sp</dimen>
+    <dimen name="text_size_headline_material">24sp</dimen>
+    <dimen name="text_size_title_material">20sp</dimen>
+    <dimen name="text_size_subhead_material">16sp</dimen>
+    <dimen name="text_size_title_material_toolbar">20dp</dimen>
+    <dimen name="text_size_subtitle_material_toolbar">16dp</dimen>
+    <dimen name="text_size_menu_material">16sp</dimen>
+    <dimen name="text_size_menu_header_material">14sp</dimen>
+    <dimen name="text_size_body_2_material">14sp</dimen>
+    <dimen name="text_size_body_1_material">14sp</dimen>
+    <dimen name="text_size_caption_material">12sp</dimen>
+    <dimen name="text_size_button_material">14sp</dimen>
+
+    <!-- Non-Material Design-->
+    <dimen name="text_size_edit_text_small">14sp</dimen>
+
+    <dimen name="text_size_large_material">22sp</dimen>
+    <dimen name="text_size_medium_material">18sp</dimen>
+    <dimen name="text_size_small_material">14sp</dimen>
+
+    <!-- Elevation when button is pressed -->
+    <dimen name="button_elevation_material">2dp</dimen>
+    <dimen name="toolbar_elevation_material">2dp</dimen>
+
+    <!-- Margins -->
+    <dimen name="margin_screen_edge">16dp</dimen>
+    <dimen name="margin_top_views">8dp</dimen>
+    <dimen name="margin_bottom_views">8dp</dimen>
+    <dimen name="margin_bottom_medium">16dp</dimen>
+
+    <!-- CheckBox has an implicit padding value-->
+    <dimen name="margin_screen_edge_no_default_value">10dp</dimen>
+
+    <!-- Padding -->
+    <dimen name="padding_screen_edge">16dp</dimen>
+    <dimen name="padding_button">8dp</dimen>
+    <dimen name="padding_view">8dp</dimen>
+
+    <!-- Images sizes -->
+    <dimen name="small_icon_size">48dp</dimen>
+    <dimen name="banner_square_icon_size">100dp</dimen>
+    <dimen name="banner_landscape_icon_size">200dp</dimen>
+
+    <!-- Drawables -->
+    <dimen name="stroke_view_drawable">1dp</dimen>
+    <dimen name="corner_view_drawable">3dp</dimen>
+    <dimen name="padding_view_drawable">14dp</dimen>
+    <dimen name="width_cursor_edit_text">0.5dp</dimen>
+
     <dimen name="image_size">300dp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
 </resources>

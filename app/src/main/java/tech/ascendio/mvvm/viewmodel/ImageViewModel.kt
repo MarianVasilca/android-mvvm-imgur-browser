@@ -22,7 +22,7 @@ class ImageViewModel
                 if (subreddit == null) {
                     AbsentLiveData.create()
                 } else {
-                    galleryRepository.getSubredditGalleries(subreddit, 1)
+                    galleryRepository.getSubredditGalleries(subreddit)
                 }
             }
 
