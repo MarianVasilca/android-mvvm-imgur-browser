@@ -18,4 +18,6 @@
     <string name="app_name">Imgur Browser</string>
     <string name="error_unknown">Oops! Unknown error</string>
     <string name="iv_description_image_item">Image Item</string>
+    <string name="action_search">Search</string>
+    <string name="search_hint">Enter a subreddit…</string>
 </resources>

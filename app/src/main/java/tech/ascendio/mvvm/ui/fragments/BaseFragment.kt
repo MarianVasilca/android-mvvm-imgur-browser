@@ -1,5 +1,6 @@
 package tech.ascendio.mvvm.ui.fragments
 
+import android.app.Activity
 import android.databinding.DataBindingComponent
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
@@ -11,9 +12,11 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import tech.ascendio.mvvm.ui.activities.MainActivity
 import tech.ascendio.mvvm.util.AutoClearedValue
 import tech.ascendio.mvvm.util.binding.FragmentDataBindingComponent
+
 
 abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
 
@@ -55,13 +58,23 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
         onBoundViews()
     }
 
-
     protected fun onBackPressed() {
         activity?.onBackPressed()
     }
 
-    private fun getMainActivity(): MainActivity {
+    protected fun getMainActivity(): MainActivity {
         return activity as MainActivity
+    }
+
+    fun hideKeyboard(activity: Activity) {
+        val imm = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        //Find the currently focused view, so we can grab the correct window token from it.
+        var view = activity.currentFocus
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = View(activity)
+        }
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     internal abstract fun onBoundViews()

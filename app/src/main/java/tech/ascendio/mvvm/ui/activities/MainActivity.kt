@@ -28,10 +28,10 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
+    override fun supportFragmentInjector() = dispatchingAndroidInjector
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
     }
-
-    override fun supportFragmentInjector() = dispatchingAndroidInjector
 }

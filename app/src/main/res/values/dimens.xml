@@ -16,4 +16,5 @@
 
 <resources>
     <dimen name="image_size">300dp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
 </resources>

@@ -1,0 +1,102 @@
+package tech.ascendio.mvvm.util
+
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.support.annotation.DrawableRes
+import android.support.annotation.LayoutRes
+import android.support.annotation.StringRes
+import android.support.design.widget.Snackbar
+import android.support.graphics.drawable.VectorDrawableCompat
+import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
+import android.support.v7.widget.AppCompatCheckBox
+import android.support.v7.widget.SearchView
+import android.text.Editable
+import android.text.TextWatcher
+import android.text.method.PasswordTransformationMethod
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
+import com.bumptech.glide.Glide
+
+fun Fragment.startActivity(cls: Class<*>) {
+    startActivity(Intent(context, cls))
+}
+
+fun String.urlIntent(): Intent =
+        Intent(Intent.ACTION_VIEW).setData(Uri.parse(this))
+
+fun ViewGroup.inflate(@LayoutRes layout: Int, attachToRoot: Boolean = true): View =
+        LayoutInflater.from(context).inflate(layout, this, attachToRoot)
+
+fun String.hasPermission(context: Context): Boolean =
+        ContextCompat.checkSelfPermission(context, this) == PackageManager.PERMISSION_GRANTED
+
+fun TextView.setDrawableLeft(@DrawableRes drawableRes: Int, activity: Activity) {
+    val drawable = VectorDrawableCompat.create(resources, drawableRes, activity.theme)
+    setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+}
+
+fun View.showSnackbarLong(@StringRes message: Int) =
+        showSnackbarLong(resources.getString(message))
+
+fun View.showSnackbarLong(message: String) =
+        Snackbar.make(this, message, Snackbar.LENGTH_LONG).show()
+
+fun View.setVisibleIf(condition: Boolean) {
+    visibility = if (condition) View.VISIBLE else View.GONE
+}
+
+fun ImageView.setImageUrl(url: String) = Glide.with(this).load(url).into(this)
+
+inline fun <reified T> flatten(vararg lists: List<T>?) = lists.flatMap { it ?: emptyList() }
+
+fun Float.lerp(other: Float, amount: Float): Float = this + amount * (other - this)
+
+fun Float.sqrt() = Math.sqrt(this.toDouble()).toFloat()
+
+fun View.getText(@StringRes res: Int) = this.resources.getText(res)
+operator fun Boolean.inc() = !this
+
+fun EditText.parseIntOrNull(): Int? {
+    return try {
+        Integer.parseInt(text.toString())
+    } catch (e: NumberFormatException) {
+        null
+    }
+}
+
+fun EditText.getString(): String = this.text.toString()
+
+fun EditText.onChange(cb: (String) -> Unit) = this.addTextChangedListener(object : TextWatcher {
+    override fun afterTextChanged(s: Editable?) = cb(s.toString())
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+})
+
+inline fun SearchView.onSearch(crossinline onSearch: (String?) -> Unit) = this.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        onSearch(query)
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean = true
+})
+
+fun EditText.onPasswordTransformation(hidePassword: Boolean) {
+    transformationMethod = if (hidePassword) PasswordTransformationMethod() else null
+    setSelection(length())
+}
+
+fun AppCompatCheckBox.onStateChanged(cb: (Boolean) -> Unit) =
+        this.setOnCheckedChangeListener { _, isChecked -> cb(isChecked) }
+
+fun Context.hasPermission(permission: String): Boolean {
+    return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
+}

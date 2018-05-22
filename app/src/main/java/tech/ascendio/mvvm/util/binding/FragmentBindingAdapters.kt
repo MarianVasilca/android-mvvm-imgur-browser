@@ -19,10 +19,8 @@ package tech.ascendio.mvvm.util.binding
 import android.databinding.BindingAdapter
 import android.support.v4.app.Fragment
 import android.widget.ImageView
-import tech.ascendio.mvvm.testing.OpenForTesting
-
 import com.bumptech.glide.Glide
-
+import tech.ascendio.mvvm.testing.OpenForTesting
 import javax.inject.Inject
 
 /**
